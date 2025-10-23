@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream>   // rozwiazanie poprawne
 #include <string>
 #include <vector>
 
@@ -77,7 +77,7 @@ bool isSameCar(const Car3& Car, const Car3& otherCar) {
         cout << "To jest ten sam samochód." << endl;
         return true;
     } else {
-        cout << "To nie jest ten sam samochód." << endl;
+        cout << "To nie jest ten sam samochód." << endl;  // wlasciwie "taki sam"
         return false;
     }
 }
@@ -93,7 +93,7 @@ class Parrot {
             cout << "Stworzono papugę o imieniu " << name << ", która mówi: " << sentance[sentance.size() - 1] << endl;
         }
 
-        void changeSentance(string newSentance) {
+        void changeSentance(string newSentance) {   // raczej dodanie frazy, nie zmiana
             sentance.push_back(newSentance);
             cout << name << " mówi: " << newSentance << endl;
         }
@@ -145,8 +145,8 @@ void Zadanie4() {
 
 //Funkcja ze switch case'm do wyboru odpowiedniego zadania.
 void WybórZadania(int number) {
-    switch (number) {
-        case 0:
+    switch (number) {  // ladne menu wyboru
+           case 0:
             cout << "Zamykanie programu" << endl;
             break;
         case 1:
@@ -183,4 +183,5 @@ int main() {
     } while (number != 0);
     
     return 0;
+
 }
