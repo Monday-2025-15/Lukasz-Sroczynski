@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream>    // rozwiazanie poprawne
 #include <string>
 
 using namespace std;
@@ -57,4 +57,5 @@ int main() {
     Tablica arr2(20);
     Tablica arr3(50);
     return 0;
+
 }
