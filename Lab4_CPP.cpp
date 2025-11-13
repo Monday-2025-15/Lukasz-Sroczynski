@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream> // poprawne rozwiazanie
 #include <string>
 
 using namespace std;
@@ -143,4 +143,5 @@ int main() {
     administrator.pokazDane();
 
     return 0;
+
 }
