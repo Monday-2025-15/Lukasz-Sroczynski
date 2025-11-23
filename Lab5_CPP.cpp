@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream>   // rozwiazanie poprawne; prosze tylko uzupelnic o komentarz do zadania nr 6
 #include <string>
 
 using namespace std;
@@ -131,6 +131,7 @@ class Samochod6 : private Pojazd6 {
             cout << "Samochod " << marka << " " << model << " przyspiesza" << endl;
         }
 };
+// jaka jest zatem roznica miedzy dziedziczeniem protected a private?
 
 class Silnikowy7 {
     public:
@@ -208,7 +209,7 @@ class ElektrycznySamochod9 : public Samochod9 {
 };
 
 class Pojazd0 {
-    public:
+    public:  // szkoda, że nie jeszcze atrybutow w klasie
         Pojazd0() {}
 
         ~Pojazd0() {}
@@ -427,4 +428,5 @@ int main() {
     } while (number != 0);
 
     return 0;
+
 }
