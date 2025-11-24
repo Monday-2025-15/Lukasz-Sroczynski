@@ -132,6 +132,8 @@ class Samochod6 : private Pojazd6 {
         }
 };
 // jaka jest zatem roznica miedzy dziedziczeniem protected a private?
+//Dziedziczenie protected pozzwala innym klasom dalej dziedziczyć, 
+// a private powoduje, że już nie bedzie można dalej po niej dziedziczyć - jest prywatna.
 
 class Silnikowy7 {
     public:
@@ -430,3 +432,4 @@ int main() {
     return 0;
 
 }
+
