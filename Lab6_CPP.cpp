@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream>    // Rozwiazanie poprawne
 #include <string>
 #include <vector>
 #include <memory>
@@ -184,4 +184,5 @@ int main() {
     } while (number != 0);
 
     return 0;
+
 }
