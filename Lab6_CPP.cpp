@@ -1,4 +1,4 @@
-#include <iostream>    // Rozwiazanie poprawne
+#include <iostream>    // Rozwiazanie poprawne i wyczerpujace; wpisuje "+"
 #include <string>
 #include <vector>
 #include <memory>
@@ -186,3 +186,4 @@ int main() {
     return 0;
 
 }
+
