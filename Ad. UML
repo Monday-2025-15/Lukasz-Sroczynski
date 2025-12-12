@@ -1,3 +1,4 @@
 Nie wszystkie relacje zamieszczone na diagramie wydają się poprawne (np. nauczyciel - kurs, materiał - kurs).
-W klasach nie zamieszczono żadnych opercji "właściwych", sa tylko konstruktory i destruktory.
-Ponadto, brak jakichkolwiek atrybutów widoczności
+W klasach nie zamieszczono żadnych opercji "właściwych", są tylko konstruktory i destruktory.
+Ponadto, nie oznaczono widoczności jakichkolwiek atrybutów, czy operacji.
+Proszę wprowadzic poprawki do diagramu.
