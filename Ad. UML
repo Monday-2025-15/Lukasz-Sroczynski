@@ -1,0 +1,3 @@
+Nie wszystkie relacje zamieszczone na diagramie wydają się poprawne (np. nauczyciel - kurs, materiał - kurs).
+W klasach nie zamieszczono żadnych opercji "właściwych", sa tylko konstruktory i destruktory.
+Ponadto, brak jakichkolwiek atrybutów widoczności
