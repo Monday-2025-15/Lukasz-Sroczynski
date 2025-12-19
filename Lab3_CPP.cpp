@@ -1,99 +1,106 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
+class Kurs;
+
 class Osoba {
-    private:
+    protected:
         string imie;
         string nazwisko;
         int dataUrodzenia;
-    public:
-        Osoba(string i, string n, int d) : imie(i), nazwisko(n), dataUrodzenia(d) {
-            cout << "Stworzono osobę: " << imie << " " << nazwisko << ", data urodzenia: " << dataUrodzenia << endl;
-        }
 
-        ~Osoba() {
-            cout << "Usunięto osobę: " << imie << " " << nazwisko << endl;
+    public:
+        Osoba(string i, string n, int d) : imie(i), nazwisko(n), dataUrodzenia(d) {}
+
+        virtual ~Osoba() {}
+};
+
+class Uczen : public Osoba {
+    private:
+        vector<Kurs*> kursy;
+
+    public:
+        Uczen(string i, string n, int d) : Osoba(i, n, d) {}
+
+        void zapiszNaKurs(Kurs* k) {
+            kursy.push_back(k);
         }
 };
 
 class Nauczyciel : public Osoba {
     private:
-        string kurs;
-    public:
-        Nauczyciel(string i, string n, int d, string k) : Osoba(i, n, d), kurs(k) {
-            cout << "Stworzono nauczyciela kursu: " << kurs << endl;
-        }
+        vector<Kurs*> prowadzoneKursy;
 
-        ~Nauczyciel() {
-            cout << "Usunięto nauczyciela kursu: " << kurs << endl;
+    public:
+        Nauczyciel(string i, string n, int d) : Osoba(i, n, d) {}
+
+        void dodajKurs(Kurs* k) {
+            prowadzoneKursy.push_back(k);
         }
 };
 
-class Uczen : public Osoba {
-    private:
-        string kurs;
-    public:
-        Uczen(string i, string n, int d, string k) : Osoba(i, n, d), kurs(k) {
-            cout << "Stworzono ucznia w kursie: " << kurs << endl;
-        }
-
-        ~Uczen() {
-            cout << "Usunięto ucznia w kursie: " << kurs << endl;
-        }
-};
-
-class kurs {
-    private:
-        string nazwaKursu;
-        int kodKursu;
-    public:
-        kurs(string nazwa, int kod) : nazwaKursu(nazwa), kodKursu(kod) {
-            cout << "Stworzono kurs: " << nazwaKursu << ", o kodie " << kodKursu << endl;
-        }
-
-        ~kurs() {
-            cout << "Usunięto kurs: " << nazwaKursu << endl;
-        }
-};
-
-class salaLekcyjna {
+class SalaLekcyjna {
     private:
         int numerSali;
         int pojemnosc;
-    public:
-        salaLekcyjna(int nr, int poj) : numerSali(nr), pojemnosc(poj) {
-            cout << "Stworzono salę lekcyjną nr: " << numerSali << ", o pojemności " << pojemnosc << endl;
-        }
 
-        ~salaLekcyjna() {
-            cout << "Usunięto salę lekcyjną nr: " << numerSali << endl;
-        }
+    public:
+        SalaLekcyjna(int nr, int poj) : numerSali(nr), pojemnosc(poj) {}
 };
 
-class material {
+class Material {
     private:
         string nazwaMaterialu;
         string typPliku;
+
     public:
-        material(string nazwa, string typ) : nazwaMaterialu(nazwa), typPliku(typ) {
-            cout << "Stworzono materiał: " << nazwaMaterialu << ", typu: " << typPliku << endl;
+        Material(string nazwa, string typ) : nazwaMaterialu(nazwa), typPliku(typ) {}
+};
+
+class Kurs {
+    private:
+        string nazwaKursu;
+        int kodKursu;
+        Nauczyciel* nauczyciel;
+        SalaLekcyjna* sala;
+        vector<Uczen*> uczniowie;
+        vector<Material> materialy;
+
+    public:
+        Kurs(string nazwa, int kod, SalaLekcyjna* s) : nazwaKursu(nazwa), kodKursu(kod), sala(s) {}
+
+        void przypiszNauczyciela(Nauczyciel* n) {
+            nauczyciel = n;
+            n->dodajKurs(this);
         }
 
-        ~material() {
-            cout << "Usunięto materiał: " << nazwaMaterialu << endl;
+        void dodajUcznia(Uczen* u) {
+            uczniowie.push_back(u);
+            u->zapiszNaKurs(this);
+        }
+
+        void dodajMaterial(string nazwa, string typ) {
+            materialy.emplace_back(nazwa, typ);
         }
 };
 
-
 int main() {
-    Osoba osoba1("Lambert", "Z Łodzi", 1980);
-    Nauczyciel nauczyciel1("Visemir", "Z Norymbergii", 1975, "Historia Sztuki Współczesnej");
-    Uczen uczen1("Geral", "Z Rivii", 2005, "Historia Sztuki Współczesnej");
-    kurs kurs1("Historia Sztuki Współczesnej", 101);
-    salaLekcyjna sala1(42, 30);
-    material material1("Kompedium Wiedzy", "Papirus");
+    SalaLekcyjna sala1(42, 30);
+
+    Nauczyciel nauczyciel1("Vesemir", "z Kaer Morhen", 1960);
+    Uczen uczen1("Geralt", "z Rivii", 2005);
+    Uczen uczen2("Ciri", "z Cintry", 2006);
+
+    Kurs kurs1("Historia Magii", 101, &sala1);
+
+    kurs1.przypiszNauczyciela(&nauczyciel1);
+    kurs1.dodajUcznia(&uczen1);
+    kurs1.dodajUcznia(&uczen2);
+
+    kurs1.dodajMaterial("Kompedium Wiedzy", "Papirus");
 
     return 0;
 }
@@ -105,67 +112,63 @@ int main() {
 
 classDiagram
 
-class Osoba {   
-- string imie
-- string nazwisko
-- int dataUrodzenia
-- Osoba(imie, nazwisko, dataUrodzenia)
-- ~Osoba()
+class Osoba {
+- imie : string
+- nazwisko : string
+- dataUrodzenia : int
++ Osoba()
++ ~Osoba()
 }
 
-class Nauczyciel {   
-- string kurs
-- Nauczyciel(imie, nazwisko, dataUrodzenia, kurs)
-- ~Nauczyciel()
+class Nauczyciel {
+- prowadzoneKursy : vector
++ dodajKurs()
 }
 
 class Uczen {
-- string kurs
-- Uczen(imie, nazwisko, dataUrodzenia, kurs)
-- ~Uczen()
+- kursy : vectro
++ zapiszNaKurs()
 }
 
-class kurs {
-- string nazwaKursu
-- int kodKursu
-- kurs(nazwaKursu, kodKursu)
-- ~kurs()
+class Kurs {
+- nazwaKursu : string
+- kodKursu : int
++ Kurs()
++ przypiszNauczyciela()
++ dodajUcznia()
++ dodajMaterial()
 }
 
-class salaLekcyjna {
-- int numerSali
-- int pojemnosc
-- salaLekcyjna(numerSali, pojemnosc)
-- ~salaLekcyjna()
+class SalaLekcyjna {
+- numerSali : int
+- pojemnosc : int
++ SalaLekcyjna()
 }
 
-class material {    
-- string nazwaMaterialu
-- string typPliku
-- material(nazwaMaterialu, typPliku)
-- ~material()
+class Material {
+- nazwaMaterialu : string
+- typPliku : string
++ Material()
 }
-
 
 %% Dziedziczenie
 Osoba <|-- Nauczyciel
 Osoba <|-- Uczen
 
-%% Asocjacja:
-Uczen --> "1.." kurs
-kurs --> "0.." Uczen
+%% Asocjacja (wiele do wielu)
+Uczen "0..*" -- "0..*" Kurs
 
-%% Agregacja:
-Nauczyciel o-- "0.." kurs
-kurs --> "0..1" Nauczyciel
+%% Asocjacja (nauczyciel prowadzi kursy)
+Nauczyciel "1" -- "0..*" Kurs
 
-%% Kompozycja:
-kurs *-- "0.." material
-material --> "1" kurs
+%% Relacja zwykła
+%%Kurs "1" --> "1" SalaLekcyjna
 
-%% Relacja zwykła:
-kurs --> "1" salaLekcyjna
-salaLekcyjna --> "0.." kurs
+%% Kompozycja
+Kurs *-- "0..*" Material
+
+%% Agregacja
+SalaLekcyjna --o "1.." Kurs
 
 
 ####################################################*/
