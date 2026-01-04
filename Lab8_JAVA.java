@@ -35,7 +35,7 @@ class Bike extends Vehicle {
     }
 }
 
-class VehicleFactory {
+class VehicleFactory {    //takze i ta klasa mogła byc klasa abstrakcyjna, a w slad za nia mozna bylo zbudowac odpowiednie wytworcze klasy pochodne
     public Vehicle createVehicle(String type) {
         if (type.equals("car")) {
             return new Car();
@@ -59,7 +59,7 @@ class Pizza {
         this.topping = builder.topping;
     }
 
-    public static class PizzaBuilder {
+    public static class PizzaBuilder {    // tutaj z kolei mozna bylo zdefiniowac odrebny interfejs (w stosunku do klasy Pizza), ktory bedzie nastepnie implementowany przez klasy reprezentujace przygotowanie poszczegolnych rodzajow pizzy
         private String dough;
         private String sauce;
         private String topping;
@@ -104,4 +104,5 @@ public class Lab8_JAVA {
 
         System.out.println(pizza);
     }
+
 }
