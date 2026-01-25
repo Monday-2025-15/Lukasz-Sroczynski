@@ -1,4 +1,4 @@
-class DatabaseConnection {
+class DatabaseConnection {   // rozwiazanie poprawne
     private static DatabaseConnection instance;
 
     private DatabaseConnection() {
@@ -59,7 +59,7 @@ class Pizza {
         this.topping = builder.topping;
     }
 
-    public static class PizzaBuilder {    // tutaj z kolei mozna bylo zdefiniowac odrebny interfejs (w stosunku do klasy Pizza), ktory bedzie nastepnie implementowany przez klasy reprezentujace przygotowanie poszczegolnych rodzajow pizzy
+    public static class PizzaBuilder {    // tutaj z kolei mozna bylo zdefiniowac odrebny (w stosunku do klasy Pizza) interfejs, ktory bedzie nastepnie implementowany przez klasy reprezentujace przygotowanie poszczegolnych rodzajow pizzy
         private String dough;
         private String sauce;
         private String topping;
@@ -106,3 +106,4 @@ public class Lab8_JAVA {
     }
 
 }
+
